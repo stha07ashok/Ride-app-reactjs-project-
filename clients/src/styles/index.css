@@ -7,6 +7,14 @@
   --nr-yellow-dark: #f2b705;
   --nr-gray: #f3f4f6;
 }
+
+button {
+  background-color: #eab308;
+  transition: transform 0.2s ease;
+}
+button:hover {
+  transform: scale(1.05);
+}
 html,
 body,
 #root {
@@ -48,7 +56,8 @@ html.nm-dark .bg-white {
   background-color: rgba(255, 255, 255, 0.03) !important;
 }
 
-html.nm-dark .floating-controls {
+html.nm-dark .floating-controls,
+html.nm-dark .profile-panel {
   background-color: #1f2937 !important;
   color: #e5e7eb !important;
 }

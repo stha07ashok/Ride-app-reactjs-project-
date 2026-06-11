@@ -31,7 +31,7 @@ export default function LandingPage() {
             Premium Ride Solutions
           </p>
           <div className="pt-4 flex items-center space-x-6">
-            <button className="bg-black text-white px-8 py-3 rounded-md font-bold hover:bg-gray-800 transition shadow-[0_0_15px_rgba(234,179,8,0.4)]">
+            <button className="bg-black text-white px-8 py-3 rounded-md font-bold hover:bg-gray-800 transition shadow-[0_0_200px_rgba(234,179,8,1)] hover:scale-500 duration-500">
               Get Started
             </button>
             <button className="  font-bold underline underline-offset-4 hover:text-gray-600 transition">
@@ -41,7 +41,7 @@ export default function LandingPage() {
         </div>
 
         {/* Right Graphics (Car, Persons, Mobile) */}
-        <div className="lg:col-span-7 flex justify-center lg:justify-end relative">
+        <div className="lg:col-span-7 flex justify-center lg:justify-end relative ">
           {/* Replace the placeholder below with your uploaded asset path */}
           <img
             src={namlorides}
@@ -51,7 +51,7 @@ export default function LandingPage() {
         </div>
       </main>
 
-      <hr className="border-gray-300 w-full" />
+      <hr className="border-gray-300 w-full shadow-lg" />
 
       {/* 3. Footer / Info Section */}
       <footer className="bg-white max-w-7xl w-full mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">

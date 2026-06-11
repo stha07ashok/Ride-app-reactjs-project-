@@ -94,7 +94,7 @@ export default function MapView({
     <MapContainer
       center={[center.lat, center.lng]}
       zoom={13}
-      className="h-full w-full rounded"
+      className="h-full w-full rounded z-50!"
     >
       <MapUpdater center={center} />
       <TileLayer url={tileUrl} />

@@ -107,7 +107,7 @@ export default function RiderPage() {
                 <button
                   onClick={() => locateAddress(pickupAddress, "pickup")}
                   disabled={locating}
-                  className="bg-yellow-500 px-3 py-1 rounded"
+                  className="bg-yellow-500  px-3 py-1 rounded"
                 >
                   Locate Pickup
                 </button>
@@ -137,7 +137,7 @@ export default function RiderPage() {
                 <button
                   onClick={() => locateAddress(dropoffAddress, "dropoff")}
                   disabled={locating}
-                  className="bg-yellow-500 text-white px-3 py-1 rounded"
+                  className="bg-yellow-500  px-3 py-1 rounded"
                 >
                   Locate Dropoff
                 </button>
@@ -191,7 +191,7 @@ export default function RiderPage() {
                       setPickupAddress("");
                       setDropoffAddress("");
                     }}
-                    className="flex-1 bg-yellow-500 text-white py-2 rounded"
+                    className="flex-1 bg-yellow-500  py-2 rounded"
                   >
                     Cancel
                   </button>

@@ -33,7 +33,7 @@ export function RiderControls({
       <div className="flex gap-2">
         <button
           onClick={onRequest}
-          className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded"
+          className="flex-1 bg-yellow-500 hover:bg-yellow-600  py-2 rounded"
         >
           Request Ride
         </button>
