@@ -91,78 +91,76 @@ export default function MapView({
   }
 
   return (
-    <MapContainer
-      center={[center.lat, center.lng]}
-      zoom={13}
-      className="h-full w-full rounded z-50!"
-    >
-      <MapUpdater center={center} />
-      <TileLayer url={tileUrl} />
-      <ClickHandler onClick={onMapClick} />
+    <div className="relative w-full h-full">
+      <MapContainer
+        center={[center.lat, center.lng]}
+        zoom={13}
+        className="h-full w-full rounded"
+      >
+        <MapUpdater center={center} />
+        <TileLayer url={tileUrl} />
+        <ClickHandler onClick={onMapClick} />
 
-      {currentPos && (
-        <Marker position={[currentPos.lat, currentPos.lng]} icon={currentIcon}>
-          <Popup>
-            <div className="font-semibold">You are here</div>
-            <div className="text-xs text-gray-500">
-              {currentPos.lat.toFixed(4)}, {currentPos.lng.toFixed(4)}
-            </div>
-          </Popup>
-        </Marker>
-      )}
-
-      {markers.map((m) => (
-        <Marker key={m.id} position={[m.pos.lat, m.pos.lng]} icon={icon}>
-          <Popup>
-            <div className="font-semibold">{m.label ?? "Marker"}</div>
-            <div className="text-xs text-gray-500">
-              {m.pos.lat.toFixed(4)}, {m.pos.lng.toFixed(4)}
-            </div>
-          </Popup>
-        </Marker>
-      ))}
-
-      {route.length > 1 && (
-        <Polyline
-          positions={route}
-          pathOptions={{ color: "#3b82f6", weight: 4, opacity: 0.7 }}
-        />
-      )}
-
-      <div className="leaflet-top leaflet-right">
-        <div className="leaflet-control bg-white floating-controls p-3 rounded shadow-lg w-64 md:w-80">
-          <div className="font-semibold mb-2">
-            Select Destination / Use Current
-          </div>
-          <div className="text-xs text-gray-500 mb-2">
-            Click on the map to pick a point or use your current location.
-          </div>
-          <div className="mb-2">
-            <div className="text-[12px] text-gray-600">Current location</div>
-            <div className="flex items-center gap-2 mt-1">
-              <div className="flex-1 text-sm text-gray-700">
-                {currentPos
-                  ? `${currentPos.lat.toFixed(4)}, ${currentPos.lng.toFixed(4)}`
-                  : "Unknown"}
+        {currentPos && (
+          <Marker position={[currentPos.lat, currentPos.lng]} icon={currentIcon}>
+            <Popup>
+              <div className="font-semibold">You are here</div>
+              <div className="text-xs text-gray-500">
+                {currentPos.lat.toFixed(4)}, {currentPos.lng.toFixed(4)}
               </div>
-              <button
-                onClick={async () => {
-                  if (!currentPos) return;
-                  if (onSetPickup) onSetPickup(currentPos);
-                  const addr = await reverseGeocode(currentPos);
-                  if (addr && onSetPickupAddress) onSetPickupAddress(addr);
-                }}
-                className="text-sm bg-red-500 text-white px-2 py-1 rounded whitespace-nowrap"
-              >
-                Use as Pickup
-              </button>
+            </Popup>
+          </Marker>
+        )}
+
+        {markers.map((m) => (
+          <Marker key={m.id} position={[m.pos.lat, m.pos.lng]} icon={icon}>
+            <Popup>
+              <div className="font-semibold">{m.label ?? "Marker"}</div>
+              <div className="text-xs text-gray-500">
+                {m.pos.lat.toFixed(4)}, {m.pos.lng.toFixed(4)}
+              </div>
+            </Popup>
+          </Marker>
+        ))}
+
+        {route.length > 1 && (
+          <Polyline
+            positions={route}
+            pathOptions={{ color: "#3b82f6", weight: 4, opacity: 0.7 }}
+          />
+        )}
+      </MapContainer>
+
+      {/* Floating control outside MapContainer so Leaflet's z-index CSS doesn't apply */}
+      <div className="absolute top-2 right-2 z-[1100] bg-white floating-controls p-3 rounded shadow-lg w-64 md:w-80 pointer-events-auto">
+        <div className="font-semibold mb-2">
+          Select Destination / Use Current
+        </div>
+        <div className="text-xs text-gray-500 mb-2">
+          Click on the map to pick a point or use your current location.
+        </div>
+        <div className="mb-2">
+          <div className="text-[12px] text-gray-600">Current location</div>
+          <div className="flex items-center gap-2 mt-1">
+            <div className="flex-1 text-sm text-gray-700">
+              {currentPos
+                ? `${currentPos.lat.toFixed(4)}, ${currentPos.lng.toFixed(4)}`
+                : "Unknown"}
             </div>
-            <div className="flex items-center gap-2 mt-2">
-              <div className="flex-1" />
-            </div>
+            <button
+              onClick={async () => {
+                if (!currentPos) return;
+                if (onSetPickup) onSetPickup(currentPos);
+                const addr = await reverseGeocode(currentPos);
+                if (addr && onSetPickupAddress) onSetPickupAddress(addr);
+              }}
+              className="text-sm bg-red-500 text-white px-2 py-1 rounded whitespace-nowrap"
+            >
+              Use as Pickup
+            </button>
           </div>
         </div>
       </div>
-    </MapContainer>
+    </div>
   );
 }
