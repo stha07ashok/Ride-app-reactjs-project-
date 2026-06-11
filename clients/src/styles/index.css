@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nr-yellow: #f6c84c;
+  --nr-yellow-dark: #f2b705;
+  --nr-gray: #f3f4f6;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.custom-div-icon div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.map-marker-small {
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--nr-yellow);
+  border: 2px solid #fff;
+}
+
+html.nm-dark body {
+  background-color: #171717 !important;
+  color: #ffffff !important;
+}
+
+html.nm-dark header {
+  background-color: #171717 !important;
+  color: #ffffff !important;
+  border-bottom-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Ensure white backgrounds become dark and text flips */
+html.nm-dark .bg-white {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+html.nm-dark .floating-controls {
+  background-color: #1f2937 !important;
+  color: #e5e7eb !important;
+}
+
+html.nm-dark .bg-gray-50 {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+html.nm-dark .text-black,
+html.nm-dark .text-gray-900 {
+  color: #ffffff !important;
+}
+
+html.nm-dark textarea {
+  color: #000 !important;
+  background-color: #fff !important;
+}
+
+html.nm-dark .text-gray-700,
+html.nm-dark .text-gray-600,
+html.nm-dark .text-gray-500 {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+html.nm-dark .border {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
