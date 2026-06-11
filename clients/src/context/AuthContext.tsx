@@ -1,7 +1,9 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useCallback } from "react";
+import { ref, set, serverTimestamp } from "firebase/database";
+import { db } from "../services/firebase";
 import type { Role } from "../types/types";
 
-type User = {
+export type User = {
   id: string;
   name?: string;
   email: string;
@@ -18,6 +20,16 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
+function syncUserToFirestore(u: User) {
+  const userRef = ref(db, "users/" + u.id);
+  set(userRef, {
+    email: u.email,
+    name: u.name ?? "",
+    role: u.role,
+    updatedAt: serverTimestamp(),
+  });
+}
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -26,55 +38,55 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     return raw ? JSON.parse(raw) : null;
   });
 
-  const login = async (email: string, password: string) => {
-    // Simple hardcoded authentication for evaluation/testing only.
+  const login = useCallback(async (email: string, password: string) => {
     if (password !== "namlo2026") return false;
 
+    let u: User | null = null;
+
     if (email === "intern@namlotechrider.com") {
-      const u: User = {
+      u = {
         id: "user-rider",
         name: "Rider Intern",
         email,
         role: "rider",
       };
-      setUser(u);
-      localStorage.setItem("namlo_user", JSON.stringify(u));
-      return true;
-    }
-
-    if (email === "intern@namlotechdriver.com") {
-      const u: User = {
+    } else if (email === "intern@namlotechdriver.com") {
+      u = {
         id: "user-driver",
         name: "Driver Intern",
         email,
         role: "driver",
       };
-      setUser(u);
-      localStorage.setItem("namlo_user", JSON.stringify(u));
-      return true;
     }
 
-    return false;
-  };
+    if (!u) return false;
 
-  const logout = () => {
+    setUser(u);
+    localStorage.setItem("namlo_user", JSON.stringify(u));
+    syncUserToFirestore(u);
+    return true;
+  }, []);
+
+  const logout = useCallback(() => {
     setUser(null);
     localStorage.removeItem("namlo_user");
-  };
+  }, []);
 
-  const setRole = (r: Role) => {
+  const setRole = useCallback((r: Role) => {
     if (!user) return;
     const next = { ...user, role: r };
     setUser(next);
     localStorage.setItem("namlo_user", JSON.stringify(next));
-  };
+    syncUserToFirestore(next);
+  }, [user]);
 
-  const updateProfile = (changes: Partial<User>) => {
+  const updateProfile = useCallback((changes: Partial<User>) => {
     if (!user) return;
     const next = { ...user, ...changes };
     setUser(next);
     localStorage.setItem("namlo_user", JSON.stringify(next));
-  };
+    syncUserToFirestore(next);
+  }, [user]);
 
   return (
     <AuthContext.Provider

@@ -1,115 +1,97 @@
-import { useEffect, useRef, useState } from "react";
-import type { Position, Ride } from "../types/types";
+import { useEffect, useState } from "react";
 import {
-  publishRequest,
-  publishUpdate,
-  publishAccept,
-  publishComplete,
-  publishCancel,
-  onRequest,
-  onAccept,
-  onComplete,
-  onCancel,
-} from "../services/realtime";
-import { saveRide } from "../services/history";
+  ref,
+  push,
+  update,
+  onValue,
+  serverTimestamp,
+} from "firebase/database";
+import { db } from "../services/firebase";
+import type { Position, Ride } from "../types/types";
 
-type LocalRide = Ride & { simulated?: boolean };
+function docToRide(id: string, data: any): Ride {
+  return {
+    id,
+    riderId: data.riderId,
+    driverId: data.driverId ?? undefined,
+    pickup: data.pickup ?? { lat: 0, lng: 0 },
+    dropoff: data.dropoff ?? { lat: 0, lng: 0 },
+    pickupAddress: data.pickupAddress ?? undefined,
+    dropoffAddress: data.dropoffAddress ?? undefined,
+    currentPosition: data.currentPosition ?? undefined,
+    status: data.status ?? "requested",
+    createdAt: data.createdAt
+      ? new Date(data.createdAt).toISOString()
+      : new Date().toISOString(),
+    updatedAt: data.updatedAt
+      ? new Date(data.updatedAt).toISOString()
+      : undefined,
+  };
+}
+
+const ridesRef = ref(db, "rides");
 
 export function useTrip(clientId: string) {
   const [pending, setPending] = useState<Ride[]>([]);
   const [active, setActive] = useState<Ride | null>(null);
-  const movingRef = useRef<any>(null);
 
   useEffect(() => {
-    const unsub = onRequest((ride) => {
-      setPending((p) => {
-        // ignore duplicates
-        if (p.find((r) => r.id === ride.id)) return p;
-        return [...p, ride];
+    const unsub = onValue(ridesRef, (snapshot) => {
+      const all: Ride[] = [];
+      snapshot.forEach((childSnap) => {
+        all.push(docToRide(childSnap.key!, childSnap.val()));
       });
-    });
-    const unsubAccept = onAccept((ride) => {
-      setPending((p) => p.filter((r) => r.id !== ride.id));
-      setActive(ride);
-    });
-    const unsubComplete = onComplete((ride) => {
-      setActive((a) => (a && a.id === ride.id ? ride : a));
-    });
-    const unsubCancel = onCancel((ride) => {
-      setPending((p) => p.filter((r) => r.id !== ride.id));
-      setActive((a) => (a && a.id === ride.id ? null : a));
+
+      setPending(all.filter((r) => r.status === "requested"));
+
+      const myActive = all.find(
+        (r) =>
+          (r.riderId === clientId || r.driverId === clientId) &&
+          (r.status === "accepted" || r.status === "enroute"),
+      );
+      setActive(myActive ?? null);
     });
 
-    return () => {
-      unsub();
-      unsubAccept();
-      unsubComplete();
-      unsubCancel();
-    };
-  }, []);
+    return () => unsub();
+  }, [clientId]);
 
-  function requestRide(
+  async function requestRide(
     pickup: Position,
     dropoff: Position,
     pickupAddress?: string,
     dropoffAddress?: string,
   ) {
-    const ride: LocalRide = {
-      id:
-        typeof crypto !== "undefined" && "randomUUID" in crypto
-          ? (crypto as any).randomUUID()
-          : Math.random().toString(36).slice(2, 9),
+    await push(ridesRef, {
       riderId: clientId,
       pickup,
       dropoff,
-      pickupAddress: pickupAddress,
-      dropoffAddress: dropoffAddress,
+      pickupAddress: pickupAddress ?? null,
+      dropoffAddress: dropoffAddress ?? null,
       status: "requested",
-      createdAt: new Date().toISOString(),
-    } as Ride;
-    publishRequest(ride);
-    setPending((p) => [...p, ride]);
-    return ride;
+      createdAt: serverTimestamp(),
+    });
   }
 
-  function acceptRide(rideId: string, driverId: string) {
-    setPending((p) => p.filter((r) => r.id !== rideId));
-    const ride = pending.find((r) => r.id === rideId);
-    if (!ride) return;
-    const accepted: Ride = {
-      ...ride,
+  async function acceptRide(rideId: string, driverId: string) {
+    await update(ref(db, "rides/" + rideId), {
       driverId,
       status: "accepted",
-      updatedAt: new Date().toISOString(),
-    };
-    publishUpdate(accepted);
-    publishAccept(accepted);
-    setActive(accepted);
-    return accepted;
+      updatedAt: serverTimestamp(),
+    });
   }
 
-  function cancelRide(ride: Ride) {
-    const cancelled: Ride = {
-      ...ride,
+  async function cancelRide(ride: Ride) {
+    await update(ref(db, "rides/" + ride.id), {
       status: "cancelled",
-      updatedAt: new Date().toISOString(),
-    };
-    publishCancel(cancelled);
-    setPending((p) => p.filter((r) => r.id !== ride.id));
-    setActive((a) => (a && a.id === ride.id ? null : a));
-    return cancelled;
+      updatedAt: serverTimestamp(),
+    });
   }
 
   async function completeRide(ride: Ride) {
-    const finalRide: Ride = {
-      ...ride,
+    await update(ref(db, "rides/" + ride.id), {
       status: "completed",
-      updatedAt: new Date().toISOString(),
-    };
-    publishComplete(finalRide);
-    await saveRide(finalRide);
-    setActive(null);
-    return finalRide;
+      updatedAt: serverTimestamp(),
+    });
   }
 
   return { pending, active, requestRide, acceptRide, cancelRide, completeRide };

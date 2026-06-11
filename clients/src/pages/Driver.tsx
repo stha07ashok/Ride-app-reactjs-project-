@@ -49,8 +49,8 @@ export default function DriverPage() {
         <div className="space-y-4">
           <DriverControls
             pending={pending}
-            onAccept={(id) => {
-              acceptRide(id, clientId);
+            onAccept={async (id) => {
+              await acceptRide(id, clientId);
               toast.success("Ride accepted successfully");
             }}
           />
@@ -78,8 +78,8 @@ export default function DriverPage() {
                 </div>
                 <div className="flex gap-2 mt-2">
                   <button
-                    onClick={() => {
-                      completeRide(active);
+                    onClick={async () => {
+                      if (active) await completeRide(active);
                       toast.success("Ride completed successfully");
                     }}
                     className="flex-1 bg-yellow-500 text-white py-2 rounded"

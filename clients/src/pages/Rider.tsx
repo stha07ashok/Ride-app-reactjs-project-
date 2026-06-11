@@ -53,10 +53,10 @@ export default function RiderPage() {
     }
   }
 
-  function onRequest() {
+  async function onRequest() {
     if (!pickup || !dropoff)
       return alert("Select pickup and dropoff by clicking the map");
-    requestRide(
+    await requestRide(
       pickup,
       dropoff,
       pickupAddress || undefined,
@@ -183,8 +183,8 @@ export default function RiderPage() {
                 </div>
                 <div className="flex gap-2 mt-2">
                   <button
-                    onClick={() => {
-                      cancelRide(active);
+                    onClick={async () => {
+                      if (active) await cancelRide(active);
                       toast.success("Ride cancelled successfully");
                       setPickup(null);
                       setDropoff(null);

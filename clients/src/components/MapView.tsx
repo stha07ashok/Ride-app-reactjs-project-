@@ -102,7 +102,10 @@ export default function MapView({
         <ClickHandler onClick={onMapClick} />
 
         {currentPos && (
-          <Marker position={[currentPos.lat, currentPos.lng]} icon={currentIcon}>
+          <Marker
+            position={[currentPos.lat, currentPos.lng]}
+            icon={currentIcon}
+          >
             <Popup>
               <div className="font-semibold">You are here</div>
               <div className="text-xs text-gray-500">
