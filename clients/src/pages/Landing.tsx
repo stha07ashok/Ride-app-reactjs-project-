@@ -108,11 +108,11 @@ export default function LandingPage() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-3">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 ">
               <input
                 type="text"
                 placeholder="Name"
-                className="w-full bg-gray-100 border-none rounded p-3 text-sm focus:ring-2 focus:ring-yellow-500 outline-none"
+                className="w-full bg-gray-100 border-none rounded p-3 text-sm focus:ring-2 focus:ring-yellow-500 outline-none shadow-lg"
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
@@ -121,7 +121,7 @@ export default function LandingPage() {
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full bg-gray-100 border-none rounded p-3 text-sm focus:ring-2 focus:ring-yellow-500 outline-none"
+                className="w-full bg-gray-100 border-none rounded p-3 text-sm focus:ring-2 focus:ring-yellow-500 outline-none shadow-lg"
                 value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
@@ -132,7 +132,7 @@ export default function LandingPage() {
               <input
                 type="text"
                 placeholder="Message"
-                className="w-full bg-gray-100 border-none rounded p-3 text-sm focus:ring-2 focus:ring-yellow-500 outline-none"
+                className="w-full bg-gray-100 border-none rounded p-3 text-sm focus:ring-2 focus:ring-yellow-500 outline-none shadow-lg"
                 value={formData.message}
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
@@ -140,7 +140,7 @@ export default function LandingPage() {
               />
               <button
                 type="submit"
-                className="w-full sm:w-auto bg-black text-yellow-500 font-bold px-6 py-3 rounded text-sm whitespace-nowrap hover:bg-gray-800 transition"
+                className="w-full sm:w-auto bg-black text-yellow-500 font-bold px-6 py-3 rounded text-sm whitespace-nowrap hover:bg-gray-800 transition shadow-lg"
               >
                 Send Message
               </button>
@@ -148,7 +148,7 @@ export default function LandingPage() {
           </form>
 
           {/* Copyright & Socials */}
-          <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+          <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500 ">
             <p>© Copyright info - Lorem lived.</p>
             <div className="flex space-x-4 text-sm text-gray-700">
               <a href="#" className="hover:text-black">

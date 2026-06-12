@@ -29,7 +29,7 @@ export default function Header({
         className="flex items-center gap-3 no-underline"
         aria-label="Home"
       >
-        <img src={namloLogo} alt="Namlo Rides Logo" className="w-20 h-20 object-contain rounded drop-shadow-md -my-6" />
+        <img src={namloLogo} alt="Namlo Rides Logo" className="w-20 h-20 object-contain rounded drop-shadow-md -my-6 " />
         <div>
           <div className="font-semibold">Namlo Rides</div>
           <div className="text-xs text-gray-500">Your Journey, Our Passion</div>
@@ -42,22 +42,22 @@ export default function Header({
           <>
             <Link
               to="/history"
-              className="text-sm font-semibold text-gray-600 hover:text-yellow-600 px-3 py-1 rounded border border-gray-200 bg-white shadow-sm hover:scale-105 transition duration-150 inline-flex items-center gap-1.5 max-sm:hidden"
+              className="text-sm font-semibold text-gray-600 hover:text-yellow-600 px-3 py-1 rounded border border-gray-200 bg-white shadow-lg hover:scale-105 transition duration-150 inline-flex items-center gap-1.5 max-sm:hidden "
             >
               📜 History
             </Link>
 
             {user.email === import.meta.env.VITE_TEST_EMAIL ? (
-              <div className="flex gap-1 bg-white border rounded p-1 shadow-sm max-sm:hidden">
+              <div className="flex gap-1 bg-white border rounded p-1 shadow-sm max-sm:hidden shadow-lg">
                 <Link
                   to="/rider"
-                  className="px-3 py-1 text-xs font-bold rounded bg-gray-50 hover:bg-yellow-400 hover:text-white transition duration-150 inline-block text-gray-700"
+                  className="px-3 py-1 text-xs font-bold rounded bg-gray-50 hover:bg-yellow-400 hover:text-white transition duration-150 inline-block text-gray-700 shadow-lg"
                 >
                   Rider View
                 </Link>
                 <Link
                   to="/driver"
-                  className="px-3 py-1 text-xs font-bold rounded bg-gray-50 hover:bg-yellow-400 hover:text-white transition duration-150 inline-block text-gray-700"
+                  className="px-3 py-1 text-xs font-bold rounded bg-gray-50 hover:bg-yellow-400 hover:text-white transition duration-150 inline-block text-gray-700 shadow-lg"
                 >
                   Driver View
                 </Link>
@@ -70,7 +70,7 @@ export default function Header({
 
             <button
               onClick={() => setOpen((v) => !v)}
-              className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center font-semibold text-white max-sm:hidden"
+              className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center font-semibold text-white max-sm:hidden shadow-lg"
               aria-label="Profile"
             >
               {initials}
@@ -80,7 +80,7 @@ export default function Header({
 
             <button
               onClick={() => onSidebarOpen?.()}
-              className="sm:hidden w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200"
+              className="sm:hidden w-8 h-8 flex items-center justify-center rounded hover:bg-gray-200 shadow-lg"
               aria-label="Menu"
             >
               <svg
@@ -102,7 +102,7 @@ export default function Header({
         ) : (
           <button
             onClick={() => navigate("/login")}
-            className="bg-yellow-500 text-white px-3 py-1 rounded"
+            className="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow-lg"
           >
             Login
           </button>

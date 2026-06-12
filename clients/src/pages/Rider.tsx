@@ -78,9 +78,9 @@ export default function RiderPage() {
   if (!user) return null;
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50">
-        <div className="md:col-span-2 h-full min-h-[50vh]">
+    <div className="flex flex-col h-screen ">
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50 shadow-lg">
+        <div className="md:col-span-2 h-full min-h-[50vh] shadow-lg">
           <MapView
             markers={markers}
             onMapClick={handleMapClick}
@@ -100,7 +100,7 @@ export default function RiderPage() {
               <textarea
                 value={pickupAddress}
                 onChange={(e) => setPickupAddress(e.target.value)}
-                className="mt-1 block w-full border border-gray-200 rounded px-3 py-2"
+                className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 shadow-lg"
                 style={{ backgroundColor: "#ffffff", color: "#000000" }}
                 rows={2}
                 placeholder="e.g. Lazimpat, Kathmandu"
@@ -109,7 +109,7 @@ export default function RiderPage() {
                 <button
                   onClick={() => locateAddress(pickupAddress, "pickup")}
                   disabled={locating}
-                  className="bg-yellow-500  px-3 py-1 rounded"
+                  className="bg-yellow-500  px-3 py-1 rounded shadow-lg"
                 >
                   Locate Pickup
                 </button>
@@ -118,7 +118,7 @@ export default function RiderPage() {
                     setPickupAddress("");
                     setPickup(null);
                   }}
-                  className="border px-3 py-1 rounded"
+                  className="border px-3 py-1 rounded shadow-lg"
                 >
                   Clear
                 </button>
@@ -131,7 +131,7 @@ export default function RiderPage() {
               <textarea
                 value={dropoffAddress}
                 onChange={(e) => setDropoffAddress(e.target.value)}
-                className="mt-1 block w-full border border-gray-200 rounded px-3 py-2"
+                className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 shadow-lg"
                 style={{ backgroundColor: "#ffffff", color: "#000000" }}
                 rows={2}
                 placeholder="e.g. Thamel, Kathmandu"
@@ -140,7 +140,7 @@ export default function RiderPage() {
                 <button
                   onClick={() => locateAddress(dropoffAddress, "dropoff")}
                   disabled={locating}
-                  className="bg-yellow-500  px-3 py-1 rounded"
+                  className="bg-yellow-500  px-3 py-1 rounded shadow-lg"
                 >
                   Locate Dropoff
                 </button>
@@ -149,7 +149,7 @@ export default function RiderPage() {
                     setDropoffAddress("");
                     setDropoff(null);
                   }}
-                  className="border px-3 py-1 rounded"
+                  className="border px-3 py-1 rounded  shadow-lg"
                 >
                   Clear
                 </button>
@@ -163,7 +163,7 @@ export default function RiderPage() {
             onClear={onClear}
           />
 
-          <div className="p-3 bg-white rounded shadow">
+          <div className="p-3 bg-white rounded shadow shadow-lg">
             <div className="font-semibold mb-2">Current Ride Status</div>
             {active ? (
               <div className="space-y-2">
@@ -194,7 +194,7 @@ export default function RiderPage() {
                       setPickupAddress("");
                       setDropoffAddress("");
                     }}
-                    className="flex-1 bg-yellow-500  py-2 rounded"
+                    className="flex-1 bg-yellow-500  py-2 rounded shadow-lg"
                   >
                     Cancel
                   </button>

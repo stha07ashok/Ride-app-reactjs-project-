@@ -37,7 +37,7 @@ export default function DriverPage() {
 
   return (
     <div className="flex flex-col h-screen">
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50">
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50 shadow-lg">
         <div className="md:col-span-2 h-full min-h-[50vh]">
           <MapView
             markers={markers}
@@ -57,7 +57,7 @@ export default function DriverPage() {
             }}
           />
 
-          <div className="p-3 bg-white rounded shadow">
+          <div className="p-3 bg-white rounded shadow-lg">
             <div className="font-semibold mb-2">Current Ride Status</div>
             {active ? (
               <div className="space-y-2">

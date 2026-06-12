@@ -23,8 +23,10 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow px-6 py-8">
+    
+    <div className="min-h-screen flex flex-col shadow-lg">
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="w-full max-w-md bg-white rounded-xl shadow-lg px-6 py-8">
         <h2 className="text-2xl font-bold text-yellow-600 mb-4">
           Namlo Rides — Login
         </h2>
@@ -36,24 +38,24 @@ export default function Login() {
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 bg-gray-50"
+              className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 bg-gray-50 shadow-lg"
               placeholder="example@123.com"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 ">
               Password
             </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 bg-gray-50"
+              className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 bg-gray-50 shadow-lg"
               placeholder="asdfa@123"
             />
           </div>
           {error && <div className="text-sm text-red-600">{error}</div>}
-          <button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded">
+          <button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded shadow-lg">
             Sign in
           </button>
         </form>
@@ -71,6 +73,12 @@ export default function Login() {
           </ul>
         </div>
       </div>
+      </div>
+      <div className="text-center text-xs text-gray-400 py-4">
+        <div className="border mb-1"/>
+        &copy; {new Date().getFullYear()} Namlo Rides. All rights reserved.
+      </div>
     </div>
+    
   );
 }

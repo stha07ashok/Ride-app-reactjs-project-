@@ -10,7 +10,7 @@ export default function DarkModeToggle({ className }: { className?: string }) {
         onClick={() => setDark((d) => !d)}
         aria-pressed={dark}
         title={dark ? "Switch to light mode" : "Switch to dark mode"}
-        className={`w-10 h-10 rounded-full flex items-center justify-center focus:outline-none transition-colors text-sm ${
+        className={`w-10 h-10 rounded-full flex items-center justify-center focus:outline-none transition-colors text-sm shadow-lg ${
           dark ? "bg-gray-800 text-white" : "bg-gray-200 text-black"
         }`}
       >
