@@ -104,7 +104,7 @@ VITE_TEST_PASSWORD=namlo2026
    ```
 
 3. **Testing the Simulation:**
-   - Open `http://localhost:5173` in two separate browser windows side-by-side.
+   - Open `https://ride-app-reactjs-project.vercel.app/` in two separate browser windows side-by-side.
    - Log into Window A with the Rider credentials (`intern@namlotechrider.com`).
    - Log into Window B with the Driver credentials (`intern@namlotechdriver.com`).
    - Watch the interactions sync in real-time!
