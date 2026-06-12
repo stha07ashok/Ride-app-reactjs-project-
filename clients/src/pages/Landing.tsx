@@ -149,7 +149,7 @@ export default function LandingPage() {
 
           {/* Copyright & Socials */}
           <div className="pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500 ">
-            <p>© Copyright info - Lorem lived.</p>
+            <p> &copy; {new Date().getFullYear()} Namlo Rides. All rights reserved.</p>
             <div className="flex space-x-4 text-sm text-gray-700">
               <a href="#" className="hover:text-black">
                 🐦
