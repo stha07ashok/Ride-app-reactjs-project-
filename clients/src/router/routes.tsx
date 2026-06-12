@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Rider from "../pages/Rider";
 import Driver from "../pages/Driver";
 import Landing from "../pages/Landing";
+import History from "../pages/History";
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { user } = useAuth();
@@ -35,6 +36,14 @@ export default function AppRoutes() {
         element={
           <PrivateRoute>
             <Driver />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/history"
+        element={
+          <PrivateRoute>
+            <History />
           </PrivateRoute>
         }
       />

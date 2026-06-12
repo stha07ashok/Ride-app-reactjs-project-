@@ -8,6 +8,7 @@ import {
 } from "firebase/database";
 import { db } from "../services/firebase";
 import type { Position, Ride } from "../types/types";
+import { saveRideToHistory } from "../services/history";
 
 function docToRide(id: string, data: any): Ride {
   return {
@@ -81,17 +82,29 @@ export function useTrip(clientId: string) {
   }
 
   async function cancelRide(ride: Ride) {
+    const updatedRide: Ride = {
+      ...ride,
+      status: "cancelled",
+      updatedAt: new Date().toISOString(),
+    };
     await update(ref(db, "rides/" + ride.id), {
       status: "cancelled",
       updatedAt: serverTimestamp(),
     });
+    await saveRideToHistory(updatedRide);
   }
 
   async function completeRide(ride: Ride) {
+    const updatedRide: Ride = {
+      ...ride,
+      status: "completed",
+      updatedAt: new Date().toISOString(),
+    };
     await update(ref(db, "rides/" + ride.id), {
       status: "completed",
       updatedAt: serverTimestamp(),
     });
+    await saveRideToHistory(updatedRide);
   }
 
   return { pending, active, requestRide, acceptRide, cancelRide, completeRide };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 
@@ -71,9 +72,31 @@ export default function MobileSidebar({
             />
           </div>
 
-          <div className="text-sm text-gray-600">
-            Role: <span className="font-medium">{user?.role}</span>
-          </div>
+          {user?.email === "intern@namlotech.com" ? (
+            <div className="space-y-2">
+              <div className="text-sm text-gray-600 font-medium">Dual-Role Switcher:</div>
+              <div className="flex gap-2">
+                <Link
+                  to="/rider"
+                  onClick={onClose}
+                  className="flex-1 bg-gray-100 hover:bg-yellow-400 hover:text-white text-center py-2 rounded text-xs font-bold text-gray-700 transition"
+                >
+                  Rider View
+                </Link>
+                <Link
+                  to="/driver"
+                  onClick={onClose}
+                  className="flex-1 bg-gray-100 hover:bg-yellow-400 hover:text-white text-center py-2 rounded text-xs font-bold text-gray-700 transition"
+                >
+                  Driver View
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="text-sm text-gray-600">
+              Role: <span className="font-medium">{user?.role}</span>
+            </div>
+          )}
 
           <button
             onClick={handleSave}
@@ -81,6 +104,16 @@ export default function MobileSidebar({
           >
             Save
           </button>
+
+          <div className="border-t pt-4">
+            <Link
+              to="/history"
+              onClick={onClose}
+              className="w-full bg-white hover:bg-gray-50 border text-center text-gray-700 py-2 rounded-full shadow-sm block font-semibold"
+            >
+              📜 Ride History
+            </Link>
+          </div>
 
           <div className="border-t pt-4">
             <button

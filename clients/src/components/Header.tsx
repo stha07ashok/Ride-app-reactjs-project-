@@ -41,9 +41,33 @@ export default function Header({
 
         {user ? (
           <>
-            <div className="px-3 py-1 rounded text-sm bg-white border text-gray-700 max-sm:hidden">
-              {user.role === "rider" ? "Rider" : "Driver"}
-            </div>
+            <Link
+              to="/history"
+              className="text-sm font-semibold text-gray-600 hover:text-yellow-600 px-3 py-1 rounded border border-gray-200 bg-white shadow-sm hover:scale-105 transition duration-150 inline-flex items-center gap-1.5 max-sm:hidden"
+            >
+              📜 History
+            </Link>
+
+            {user.email === "intern@namlotech.com" ? (
+              <div className="flex gap-1 bg-white border rounded p-1 shadow-sm max-sm:hidden">
+                <Link
+                  to="/rider"
+                  className="px-3 py-1 text-xs font-bold rounded bg-gray-50 hover:bg-yellow-400 hover:text-white transition duration-150 inline-block text-gray-700"
+                >
+                  Rider View
+                </Link>
+                <Link
+                  to="/driver"
+                  className="px-3 py-1 text-xs font-bold rounded bg-gray-50 hover:bg-yellow-400 hover:text-white transition duration-150 inline-block text-gray-700"
+                >
+                  Driver View
+                </Link>
+              </div>
+            ) : (
+              <div className="px-3 py-1 rounded text-sm bg-white border text-gray-700 max-sm:hidden">
+                {user.role === "rider" ? "Rider" : "Driver"}
+              </div>
+            )}
 
             <button
               onClick={() => setOpen((v) => !v)}

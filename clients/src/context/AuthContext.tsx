@@ -43,7 +43,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
     let u: User | null = null;
 
-    if (email === "intern@namlotechrider.com") {
+    if (email === "intern@namlotech.com") {
+      u = {
+        id: "user-intern",
+        name: "Intern Evaluator",
+        email,
+        role: "rider",
+      };
+    } else if (email === "intern@namlotechrider.com") {
       u = {
         id: "user-rider",
         name: "Rider Intern",

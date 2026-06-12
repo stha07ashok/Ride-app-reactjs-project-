@@ -15,7 +15,7 @@ export default function Login() {
     const ok = await login(email, password);
     if (!ok) return setError("Invalid credentials");
     toast.success("Login successful");
-    const role = email === "intern@namlotechrider.com" ? "rider" : "driver";
+    const role = email === "intern@namlotech.com" || email === "intern@namlotechrider.com" ? "rider" : "driver";
     nav(role === "rider" ? "/rider" : "/driver");
   }
 
@@ -34,7 +34,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 block w-full border border-gray-200 rounded px-3 py-2"
-              placeholder="intern@namlotechrider.com (rider) or intern@namlotechdriver.com (driver)"
+              placeholder="intern@namlotech.com"
             />
           </div>
           <div>
@@ -55,11 +55,10 @@ export default function Login() {
           </button>
         </form>
         <div className="mt-4 text-xs text-gray-500">
-          Testing credentials (use the exact email):
-          <ul className="list-disc list-inside">
-            <li>Rider: intern@namlotechrider.com</li>
-            <li>Driver: intern@namlotechdriver.com</li>
-            <li>Password for both: namlo2026</li>
+          Testing credentials:
+          <ul className="list-disc list-inside font-semibold">
+            <li>Username: intern@namlotech.com</li>
+            <li>Password: namlo2026</li>
           </ul>
         </div>
       </div>

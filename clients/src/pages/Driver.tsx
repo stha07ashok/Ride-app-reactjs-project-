@@ -8,7 +8,7 @@ import { fetchRoute } from "../services/geocode";
 
 export default function DriverPage() {
   const { user } = useAuth();
-  const clientId = user?.id ?? "anon";
+  const clientId = user?.email === "intern@namlotech.com" ? "user-driver" : (user?.id ?? "anon");
   const { pending, active, acceptRide, completeRide } = useTrip(clientId);
   const [routeCoords, setRouteCoords] = useState<[number, number][]>([]);
 

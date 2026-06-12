@@ -8,7 +8,7 @@ import type { Position } from "../types/types";
 
 export default function RiderPage() {
   const { user } = useAuth();
-  const clientId = user?.id ?? "anon";
+  const clientId = user?.email === "intern@namlotech.com" ? "user-rider" : (user?.id ?? "anon");
   const { active, requestRide, cancelRide } = useTrip(clientId);
 
   const [pickup, setPickup] = useState<Position | null>(null);
