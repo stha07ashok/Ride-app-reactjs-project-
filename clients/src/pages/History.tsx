@@ -85,10 +85,14 @@ export default function HistoryPage() {
                         {ride.id}
                       </td>
                       <td className="px-6 py-4 text-gray-600 max-w-xs truncate" title={ride.pickupAddress}>
-                        {ride.pickupAddress || `${ride.pickup.lat.toFixed(4)}, ${ride.pickup.lng.toFixed(4)}`}
+                        {ride.pickupAddress || (ride.pickup && typeof ride.pickup.lat === "number" && typeof ride.pickup.lng === "number"
+                          ? `${ride.pickup.lat.toFixed(4)}, ${ride.pickup.lng.toFixed(4)}`
+                          : "N/A")}
                       </td>
                       <td className="px-6 py-4 text-gray-600 max-w-xs truncate" title={ride.dropoffAddress}>
-                        {ride.dropoffAddress || `${ride.dropoff.lat.toFixed(4)}, ${ride.dropoff.lng.toFixed(4)}`}
+                        {ride.dropoffAddress || (ride.dropoff && typeof ride.dropoff.lat === "number" && typeof ride.dropoff.lng === "number"
+                          ? `${ride.dropoff.lat.toFixed(4)}, ${ride.dropoff.lng.toFixed(4)}`
+                          : "N/A")}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span
@@ -135,13 +139,17 @@ export default function HistoryPage() {
                   <div className="space-y-1">
                     <div className="text-xs text-gray-400">PICKUP</div>
                     <div className="text-sm text-gray-700 font-medium">
-                      {ride.pickupAddress || `${ride.pickup.lat.toFixed(4)}, ${ride.pickup.lng.toFixed(4)}`}
+                      {ride.pickupAddress || (ride.pickup && typeof ride.pickup.lat === "number" && typeof ride.pickup.lng === "number"
+                        ? `${ride.pickup.lat.toFixed(4)}, ${ride.pickup.lng.toFixed(4)}`
+                        : "N/A")}
                     </div>
                   </div>
                   <div className="space-y-1">
                     <div className="text-xs text-gray-400">DROPOFF</div>
                     <div className="text-sm text-gray-700 font-medium">
-                      {ride.dropoffAddress || `${ride.dropoff.lat.toFixed(4)}, ${ride.dropoff.lng.toFixed(4)}`}
+                      {ride.dropoffAddress || (ride.dropoff && typeof ride.dropoff.lat === "number" && typeof ride.dropoff.lng === "number"
+                        ? `${ride.dropoff.lat.toFixed(4)}, ${ride.dropoff.lng.toFixed(4)}`
+                        : "N/A")}
                     </div>
                   </div>
                 </div>
