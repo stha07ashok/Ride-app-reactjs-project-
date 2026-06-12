@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 :root {
+  color-scheme: light;
   --nr-yellow: #f6c84c;
   --nr-yellow-dark: #f2b705;
   --nr-gray: #f3f4f6;
+}
+
+textarea {
+  background-color: #fff !important;
+  color: #000 !important;
 }
 
 button {
@@ -71,9 +77,14 @@ html.nm-dark .text-gray-900 {
   color: #ffffff !important;
 }
 
+html.nm-dark {
+  color-scheme: dark;
+}
+
 html.nm-dark textarea {
-  color: #000 !important;
-  background-color: #fff !important;
+  color: #fff !important;
+  background-color: #1f2937 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
 html.nm-dark .text-gray-700,

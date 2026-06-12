@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import ProfilePanel from "./ProfilePanel";
 import DarkModeToggle from "./DarkModeToggle";
+import namloLogo from "../images/namloLogo.png";
 
 export default function Header({
   onSidebarOpen,
@@ -22,15 +23,13 @@ export default function Header({
     : "NR";
 
   return (
-    <header className="relative z-50 flex items-center justify-between px-4 py-3 bg-gray-100 border-b shadow-lg">
+    <header className="relative z-50 flex items-center justify-between px-4 py-1 bg-gray-100 border-b shadow-lg h-16">
       <Link
         to={user ? (user.role === "rider" ? "/rider" : "/driver") : "/"}
         className="flex items-center gap-3 no-underline"
         aria-label="Home"
       >
-        <div className="w-10 h-10 rounded bg-yellow-400 flex items-center justify-center font-bold text-white">
-          NR
-        </div>
+        <img src={namloLogo} alt="Namlo Rides Logo" className="w-20 h-20 object-contain rounded drop-shadow-md -my-6" />
         <div>
           <div className="font-semibold">Namlo Rides</div>
           <div className="text-xs text-gray-500">Your Journey, Our Passion</div>
