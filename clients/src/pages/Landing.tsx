@@ -100,7 +100,7 @@ export default function LandingPage() {
               <div className="flex items-center space-x-2">
                 <span>📞</span>
                 <a href="tel:+15551234567" className="hover:underline">
-                  +1 (555) 123-4567
+                  +977 9866149959
                 </a>
               </div>
             </div>
