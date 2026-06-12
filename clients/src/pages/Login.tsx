@@ -9,13 +9,16 @@ export default function Login() {
   const [error, setError] = useState("");
   const { login } = useAuth();
   const nav = useNavigate();
+  const testEmailRider  = import.meta.env.VITE_TEST_EMAIL_RIDER;
+  const testEmailDriver  = import.meta.env.VITE_TEST_EMAIL_DRIVER;
+  const testPassword = import.meta.env.VITE_TEST_PASSWORD;
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const ok = await login(email, password);
     if (!ok) return setError("Invalid credentials");
     toast.success("Login successful");
-    const role = email === "intern@namlotech.com" || email === "intern@namlotechrider.com" ? "rider" : "driver";
+    const role = email === testEmailRider ? "rider" : "driver";
     nav(role === "rider" ? "/rider" : "/driver");
   }
 
@@ -34,7 +37,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 block w-full border border-gray-200 rounded px-3 py-2"
-              placeholder="intern@namlotech.com"
+              placeholder={testEmailRider}
             />
           </div>
           <div>
@@ -46,7 +49,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="mt-1 block w-full border border-gray-200 rounded px-3 py-2"
-              placeholder="namlo2026"
+              placeholder={testPassword}
             />
           </div>
           {error && <div className="text-sm text-red-600">{error}</div>}
@@ -54,11 +57,17 @@ export default function Login() {
             Sign in
           </button>
         </form>
-        <div className="mt-4 text-xs text-gray-500">
+        <div className="mt-4 text-xs text-gray-500 gap-2 flex flex-col">
           Testing credentials:
+          <p className="font-semibold text-gray-700">RIDER:</p>
+          <ul className="list-disc list-inside font-semibold mb-2">
+            <li>Username: {testEmailRider}</li>
+            <li>Password: {testPassword}</li>
+          </ul>
+          <p className="font-semibold text-gray-700">DRIVER:</p>
           <ul className="list-disc list-inside font-semibold">
-            <li>Username: intern@namlotech.com</li>
-            <li>Password: namlo2026</li>
+            <li>Username: {testEmailDriver}</li>
+            <li>Password: {testPassword}</li>
           </ul>
         </div>
       </div>

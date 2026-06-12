@@ -39,25 +39,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   const login = useCallback(async (email: string, password: string) => {
-    if (password !== "namlo2026") return false;
+    const testPassword = import.meta.env.VITE_TEST_PASSWORD;
+    const testEmailRider = import.meta.env.VITE_TEST_EMAIL_RIDER;
+    const testEmailDriver = import.meta.env.VITE_TEST_EMAIL_DRIVER;
+    
+
+    if (password !== testPassword) return false;
 
     let u: User | null = null;
 
-    if (email === "intern@namlotech.com") {
-      u = {
-        id: "user-intern",
-        name: "Intern Evaluator",
-        email,
-        role: "rider",
-      };
-    } else if (email === "intern@namlotechrider.com") {
+    if (email === testEmailRider) {
       u = {
         id: "user-rider",
         name: "Rider Intern",
         email,
         role: "rider",
       };
-    } else if (email === "intern@namlotechdriver.com") {
+    } else if (email === testEmailDriver) {
       u = {
         id: "user-driver",
         name: "Driver Intern",

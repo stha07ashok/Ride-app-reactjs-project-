@@ -48,7 +48,7 @@ export function useTrip(clientId: string) {
       const myActive = all.find(
         (r) =>
           (r.riderId === clientId || r.driverId === clientId) &&
-          (r.status === "accepted" || r.status === "enroute"),
+          (r.status === "requested" || r.status === "accepted" || r.status === "enroute"),
       );
       setActive(myActive ?? null);
     });

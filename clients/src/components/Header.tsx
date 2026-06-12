@@ -48,7 +48,7 @@ export default function Header({
               📜 History
             </Link>
 
-            {user.email === "intern@namlotech.com" ? (
+            {user.email === import.meta.env.VITE_TEST_EMAIL ? (
               <div className="flex gap-1 bg-white border rounded p-1 shadow-sm max-sm:hidden">
                 <Link
                   to="/rider"

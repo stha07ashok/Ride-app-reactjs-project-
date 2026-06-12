@@ -8,7 +8,8 @@ import type { Position } from "../types/types";
 
 export default function RiderPage() {
   const { user } = useAuth();
-  const clientId = user?.email === "intern@namlotech.com" ? "user-rider" : (user?.id ?? "anon");
+  const testEmailRider = import.meta.env.VITE_TEST_EMAIL_RIDER;
+  const clientId = user?.email === testEmailRider ? "user-rider" : (user?.id ?? "anon");
   const { active, requestRide, cancelRide } = useTrip(clientId);
 
   const [pickup, setPickup] = useState<Position | null>(null);
@@ -161,7 +162,7 @@ export default function RiderPage() {
           />
 
           <div className="p-3 bg-white rounded shadow">
-            <div className="font-semibold mb-2">Active Ride</div>
+            <div className="font-semibold mb-2">Current Ride Status</div>
             {active ? (
               <div className="space-y-2">
                 <div className="text-sm">
@@ -198,7 +199,7 @@ export default function RiderPage() {
                 </div>
               </div>
             ) : (
-              <div className="text-sm text-gray-500">No active ride</div>
+              <div className="text-sm text-gray-500">No active requests or rides</div>
             )}
           </div>
         </div>

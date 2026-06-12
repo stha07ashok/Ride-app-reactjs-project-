@@ -1,6 +1,6 @@
 import type { Ride } from "../types/types";
 
-const MOCK_API_URL = "https://6a2b8c88b687a7d5cbc569ce.mockapi.io/ride/api/rides";
+const MOCK_API_URL = import.meta.env.VITE_MOCK_API_URL;
 
 export async function saveRideToHistory(ride: Ride): Promise<void> {
   try {

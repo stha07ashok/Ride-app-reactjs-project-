@@ -8,7 +8,8 @@ import { fetchRoute } from "../services/geocode";
 
 export default function DriverPage() {
   const { user } = useAuth();
-  const clientId = user?.email === "intern@namlotech.com" ? "user-driver" : (user?.id ?? "anon");
+  const testEmailDriver = import.meta.env.VITE_TEST_EMAIL_DRIVER;
+  const clientId = user?.email === testEmailDriver ? "user-driver" : (user?.id ?? "anon");
   const { pending, active, acceptRide, completeRide } = useTrip(clientId);
   const [routeCoords, setRouteCoords] = useState<[number, number][]>([]);
 
@@ -56,7 +57,7 @@ export default function DriverPage() {
           />
 
           <div className="p-3 bg-white rounded shadow">
-            <div className="font-semibold mb-2">Active Ride</div>
+            <div className="font-semibold mb-2">Current Ride Status</div>
             {active ? (
               <div className="space-y-2">
                 <div className="text-sm">
@@ -89,7 +90,7 @@ export default function DriverPage() {
                 </div>
               </div>
             ) : (
-              <div className="text-sm text-gray-500">No active ride</div>
+              <div className="text-sm text-gray-500">No active requests or rides</div>
             )}
           </div>
         </div>

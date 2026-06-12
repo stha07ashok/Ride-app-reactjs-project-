@@ -72,7 +72,7 @@ export default function MobileSidebar({
             />
           </div>
 
-          {user?.email === "intern@namlotech.com" ? (
+          {user?.email === import.meta.env.VITE_TEST_EMAIL ? (
             <div className="space-y-2">
               <div className="text-sm text-gray-600 font-medium">Dual-Role Switcher:</div>
               <div className="flex gap-2">
