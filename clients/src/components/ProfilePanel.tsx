@@ -43,7 +43,7 @@ export default function ProfilePanel({ onClose }: { onClose?: () => void }) {
         onChange={(e) => setName(e.target.value)}
         title="Full name"
         placeholder="e.g., Ashok Shrestha"
-        className="w-full border rounded px-2 py-1 mb-2 text-sm"
+        className="w-full border rounded px-2 py-1 mb-2 text-sm bg-gray-50"
       />
       <label
         htmlFor="profile-email"

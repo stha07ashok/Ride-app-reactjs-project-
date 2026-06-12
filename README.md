@@ -25,9 +25,10 @@ Namlo Rides is a real-time ride-sharing simulation platform built to demonstrate
 - **REST API:** Standard `fetch` API communicating with MockAPI endpoints
 
 ### How the Ride Lifecycle Works
+
 1. **Request:** The Rider selects a Pickup and Dropoff location and requests a ride. A record is pushed to Firebase with status `requested`.
 2. **Accept:** The Driver dashboard observes `requested` rides. The driver can accept a ride, which updates the Firebase record status to `accepted` and assigns the driver's ID.
-3. **Complete/Cancel:** Either party can terminate the ride. The Driver can `complete` the ride, or the Rider can `cancel` it. 
+3. **Complete/Cancel:** Either party can terminate the ride. The Driver can `complete` the ride, or the Rider can `cancel` it.
 4. **History Persistence:** Upon reaching a terminal state (`completed` or `cancelled`), the ride is removed from the active view and securely POSTed to the MockAPI endpoint for long-term historical storage.
 
 ---
@@ -94,15 +95,15 @@ VITE_TEST_PASSWORD=namlo2026
 ## 💻 Running Locally
 
 1. **Install dependencies:**
+
    ```bash
    npm install
    ```
-
 2. **Start the development server:**
+
    ```bash
    npm run dev
    ```
-
 3. **Testing the Simulation:**
    - Open `https://ride-app-reactjs-project.vercel.app/` in two separate browser windows side-by-side.
    - Log into Window A with the Rider credentials (`intern@namlotechrider.com`).

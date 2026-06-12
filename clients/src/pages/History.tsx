@@ -36,7 +36,7 @@ export default function HistoryPage() {
           </div>
           <Link
             to="/"
-            className="bg-yellow-500 text-white font-semibold px-4 py-2 rounded shadow hover:bg-yellow-600 transition duration-150 inline-flex items-center gap-2"
+            className="bg-yellow-500 text-white font-semibold px-4 py-2 rounded shadow-lg hover:bg-yellow-600 hover:scale-110 hover:cursor-pointer transition duration-150 inline-flex items-center gap-2"
           >
             ← Back to Map
           </Link>
@@ -56,18 +56,18 @@ export default function HistoryPage() {
             </p>
             <Link
               to="/"
-              className="inline-block bg-yellow-500 text-white font-bold px-6 py-2 rounded-full hover:bg-yellow-600 transition"
+              className="inline-block bg-yellow-500 text-white font-bold px-6 py-2 rounded-full hover:bg-yellow-600 hover:scale-110 hover:cursor-pointer transition duration-150"
             >
               Start a Ride
             </Link>
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow overflow-hidden border border-gray-100">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-gray-100 text-xs font-bold uppercase text-gray-600 border-b">
+                  <tr className=" text-xs font-bold uppercase text-gray-600 border-b">
                     <th className="px-6 py-4">Date & Time</th>
                     <th className="px-6 py-4">Ride ID</th>
                     <th className="px-6 py-4">Pickup Address</th>

@@ -32,6 +32,7 @@ export default function MapView({
   onSetDropoff,
   onSetPickupAddress,
   onSetDropoffAddress,
+  hideControls = false,
 }: {
   center?: Position;
   markers?: { id: string; pos: Position; label?: string; color?: string }[];
@@ -41,6 +42,7 @@ export default function MapView({
   onSetDropoff?: (pos: Position) => void;
   onSetPickupAddress?: (address: string) => void;
   onSetDropoffAddress?: (address: string) => void;
+  hideControls?: boolean;
 }) {
   const [currentPos, setCurrentPos] = useState<Position | null>(null);
   const [manual, setManual] = useState<string>("");
@@ -135,35 +137,37 @@ export default function MapView({
       </MapContainer>
 
       {/* Floating control outside MapContainer so Leaflet's z-index CSS doesn't apply */}
-      <div className="absolute top-2 right-2 z-[1100] bg-white floating-controls p-3 rounded shadow-lg w-64 md:w-80 pointer-events-auto">
-        <div className="font-semibold mb-2">
-          Select Destination / Use Current
-        </div>
-        <div className="text-xs text-gray-500 mb-2">
-          Click on the map to pick a point or use your current location.
-        </div>
-        <div className="mb-2">
-          <div className="text-[12px] text-gray-600">Current location</div>
-          <div className="flex items-center gap-2 mt-1">
-            <div className="flex-1 text-sm text-gray-700">
-              {currentPos
-                ? `${currentPos.lat.toFixed(4)}, ${currentPos.lng.toFixed(4)}`
-                : "Unknown"}
+      {!hideControls && (
+        <div className="absolute top-2 right-2 z-[1100] bg-white floating-controls p-3 rounded shadow-lg w-64 md:w-80 pointer-events-auto">
+          <div className="font-semibold mb-2">
+            Select Destination / Use Current
+          </div>
+          <div className="text-xs text-gray-500 mb-2">
+            Click on the map to pick a point or use your current location.
+          </div>
+          <div className="mb-2">
+            <div className="text-[12px] text-gray-600">Current location</div>
+            <div className="flex items-center gap-2 mt-1">
+              <div className="flex-1 text-sm text-gray-700">
+                {currentPos
+                  ? `${currentPos.lat.toFixed(4)}, ${currentPos.lng.toFixed(4)}`
+                  : "Unknown"}
+              </div>
+              <button
+                onClick={async () => {
+                  if (!currentPos) return;
+                  if (onSetPickup) onSetPickup(currentPos);
+                  const addr = await reverseGeocode(currentPos);
+                  if (addr && onSetPickupAddress) onSetPickupAddress(addr);
+                }}
+                className="text-sm bg-red-500 text-white px-2 py-1 rounded whitespace-nowrap"
+              >
+                Use as Pickup
+              </button>
             </div>
-            <button
-              onClick={async () => {
-                if (!currentPos) return;
-                if (onSetPickup) onSetPickup(currentPos);
-                const addr = await reverseGeocode(currentPos);
-                if (addr && onSetPickupAddress) onSetPickupAddress(addr);
-              }}
-              className="text-sm bg-red-500 text-white px-2 py-1 rounded whitespace-nowrap"
-            >
-              Use as Pickup
-            </button>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -36,8 +36,8 @@ export default function Login() {
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full border border-gray-200 rounded px-3 py-2"
-              placeholder={testEmailRider}
+              className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 bg-gray-50"
+              placeholder="example@123.com"
             />
           </div>
           <div>
@@ -48,8 +48,8 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full border border-gray-200 rounded px-3 py-2"
-              placeholder={testPassword}
+              className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 bg-gray-50"
+              placeholder="asdfa@123"
             />
           </div>
           {error && <div className="text-sm text-red-600">{error}</div>}

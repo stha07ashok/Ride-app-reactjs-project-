@@ -100,7 +100,7 @@ export default function RiderPage() {
               <textarea
                 value={pickupAddress}
                 onChange={(e) => setPickupAddress(e.target.value)}
-                className="w-full mt-1 border rounded p-2 text-sm"
+                className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 bg-gray-50 text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
                 rows={2}
                 placeholder="e.g. Lazimpat, Kathmandu"
               />
@@ -130,7 +130,7 @@ export default function RiderPage() {
               <textarea
                 value={dropoffAddress}
                 onChange={(e) => setDropoffAddress(e.target.value)}
-                className="w-full mt-1 border rounded p-2 text-sm"
+                className="mt-1 block w-full border border-gray-200 rounded px-3 py-2 bg-gray-50 text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
                 rows={2}
                 placeholder="e.g. Thamel, Kathmandu"
               />

@@ -45,6 +45,7 @@ export default function DriverPage() {
             onMapClick={() => {}}
             onSetPickup={() => {}}
             onSetDropoff={() => {}}
+            hideControls={true}
           />
         </div>
         <div className="space-y-4">
